@@ -1,1 +1,124 @@
+<html>
+<head>
+    <title>BMI Calculator</title>
+   <style>
+   body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+label {
+    margin: 10px 0 5px;
+}
+
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+button {
+    padding: 10px;
+    background-color: rgb(50, 173, 189);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+button:hover {
+    background-color: #218838;
+}
+
+
+.result {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <form id="bmiForm">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" step="0.1" required>
+           
+            <label for="feet">Height:</label>
+            <div class="height-inputs">
+                <input type="number" id="foot" name="foot" placeholder="Foot" step="1" required>
+                <input type="number" id="inches" name="inches" placeholder="Inches" step="1" required>
+            </div>
+           
+            <button type="submit">Calculate BMI</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+
+   let weight = parseFloat(document.getElementById('weight').value);
+   let foot = parseFloat(document.getElementById('foot').value);
+   let inches = parseFloat(document.getElementById('inches').value);
+
+    const heightM = ((foot * 12) + inches) * 0.0254;
+
+
+    let bmi = weight / (heightM * heightM);
+
+
+   let resultDiv = document.getElementById('result');
+    resultDiv.textContent = `Your BMI is ${bmi.toFixed(2)}.`;
+
+
+    let feedback = '';
+    if (bmi < 18.5) {
+        feedback = 'You are underweight.';
+    } else if (bmi < 24.9) {
+        feedback = 'You have a normal weight.';
+    } else if (bmi < 29.9) {
+        feedback = 'You are overweight.';
+    } else {
+        feedback = 'You are obese.';
+    }
+    resultDiv.textContent += ' ' + feedback;
+});
+
+    </script>
+</body>
+</html>
+
+
 
